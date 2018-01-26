@@ -5,6 +5,7 @@ const getters = {
     return state.collection
   },
   current: state => {
+    // return state.todos.find(todo => todo.id === id)
     return state.current
   },
   fetching: state => {

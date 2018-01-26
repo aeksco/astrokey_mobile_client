@@ -1,28 +1,32 @@
 
 <template>
-<!--   <div id="app">
-    <AppNavbar/>
-    <Notification/>
-  </div> -->
+  <!-- <div id="app"> -->
+    <!-- <AppNavbar/> -->
+    <!-- <Notification/> -->
+  <!-- </div> -->
 
   <v-ons-splitter>
+
+    <!-- Side Menu -->
     <v-ons-splitter-side swipeable width="150px" collapse="" side="left" :open.sync="openSide">
       <v-ons-page>
         <v-ons-list>
-          <v-ons-list-item v-for="page in pages" tappable modifier="chevron" @click="currentPage = page; openSide = false">
-            <div class="center">PAGE</div>
+          <v-ons-list-item v-for="page in pages" tappable modifier="chevron" @click="currentPage = page.text; openSide = false">
+            <a class="center" :href="page.href">
+              {{ page.text }}
+            </a>
           </v-ons-list-item>
         </v-ons-list>
       </v-ons-page>
     </v-ons-splitter-side>
 
+    <!-- Page Content -->
     <v-ons-splitter-content>
-      <!-- <component :is="currentPage" :toggle-menu="() => openSide = !openSide"></component> -->
       <router-view/>
+      <!-- <component :is="currentPage" :toggle-menu="() => openSide = !openSide"></component> -->
     </v-ons-splitter-content>
-  </v-ons-splitter>
 
-  <!-- <router-view/> -->
+  </v-ons-splitter>
 </template>
 
 <script>
@@ -51,8 +55,12 @@ export default {
 
   data () {
     return {
-      currentPage: 'home',
-      pages: ['home', 'news', 'settings'],
+      currentPage: 'Home',
+      pages: [
+        { href: '#/', text: 'Home' },
+        { href: '#/devices', text: 'Devices' },
+        { href: '#/settings', text: 'Settings' }
+      ],
       openSide: false
     }
   }
