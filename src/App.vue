@@ -8,22 +8,15 @@
   <v-ons-splitter>
 
     <!-- Side Menu -->
-    <v-ons-splitter-side swipeable width="150px" collapse="" side="left" :open.sync="openSide">
-      <v-ons-page>
-        <v-ons-list>
-          <v-ons-list-item v-for="page in pages" tappable modifier="chevron" @click="currentPage = page.text; openSide = false">
-            <a class="center" :href="page.href">
-              {{ page.text }}
-            </a>
-          </v-ons-list-item>
-        </v-ons-list>
-      </v-ons-page>
+    <v-ons-splitter-side swipeable collapse width="250px"
+      :animation="$ons.platform.isAndroid() ? 'overlay' : 'reveal'"
+      :open.sync="menuIsOpen">
+      <MenuPage/>
     </v-ons-splitter-side>
 
     <!-- Page Content -->
     <v-ons-splitter-content>
       <router-view/>
-      <!-- <component :is="currentPage" :toggle-menu="() => openSide = !openSide"></component> -->
     </v-ons-splitter-content>
 
   </v-ons-splitter>
@@ -33,6 +26,7 @@
 import AppNavbar from './containers/app_navbar'
 import AppFooter from './containers/app_footer'
 import Notification from './containers/app_notification'
+import MenuPage from '@/components/Sidebar'
 
 export default {
   name: 'app',
@@ -41,7 +35,8 @@ export default {
   components: {
     AppNavbar,
     Notification,
-    AppFooter
+    AppFooter,
+    MenuPage
   },
 
   // Top-Level page Meta
@@ -52,19 +47,22 @@ export default {
       lang: 'en'
     }
   },
-
   data () {
     return {
-      currentPage: 'Home',
-      pages: [
-        { href: '#/', text: 'Home' },
-        { href: '#/devices', text: 'Devices' },
-        { href: '#/settings', text: 'Settings' }
-      ],
-      openSide: false
+      opened: false
+    }
+  },
+  computed: {
+    menuIsOpen: {
+      get () {
+        return this.opened
+      },
+      set (newValue) {
+        this.opened = newValue
+        // this.$store.commit('splitter/toggle', newValue)
+      }
     }
   }
-
 }
 </script>
 
@@ -83,5 +81,8 @@ export default {
 
   #app {
     height: 100%;
+  }
+  ons-splitter-side[side=left][animation=overlay] {
+    border-right: 1px solid #BBB;
   }
 </style>

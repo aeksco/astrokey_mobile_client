@@ -11,6 +11,7 @@ import Meta from 'vue-meta'
 import VueOnsen from 'vue-onsenui'
 import 'onsenui/css/onsenui.css'
 import 'onsenui/css/onsen-css-components.css'
+import 'onsenui/css/dark-onsen-css-components.css'
 
 // VueOnsen
 // OnsenUI components and directives
