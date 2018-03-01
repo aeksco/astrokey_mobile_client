@@ -27,7 +27,7 @@
           {{item.name}}
         </div>
         <div class="right">
-          <v-ons-switch @click="connect(item)"></v-ons-switch>
+          <v-ons-switch v-model='item.connected' @click="connect(item)"></v-ons-switch>
         </div>
       </v-ons-list-item>
     </v-ons-list>
@@ -40,7 +40,6 @@
 <script>
 import Toolbar from '@/components/Toolbar'
 // import LayoutView from './components/layout.vue'
-import store from '@/store'
 
 export default {
   name: 'device_list',
@@ -51,7 +50,7 @@ export default {
     title: 'Device'
   },
   beforeCreate () {
-    return store.dispatch('device/startScan')
+    return this.$store.dispatch('device/startScan')
   },
   data () {
     return {
@@ -60,15 +59,15 @@ export default {
   },
   computed: {
     collection () {
-      return store.getters['device/collection']
+      return this.$store.getters['device/collection']
     }
   },
   methods: {
     connect (device) {
-      return store.dispatch('device/connect', { device })
+      return this.$store.dispatch('device/connect', { device })
     },
     loadItem () {
-      return store.dispatch('device/startScan')
+      return this.$store.dispatch('device/startScan')
     }
   }
 }
