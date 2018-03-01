@@ -32,14 +32,14 @@ export default {
           icon: 'fa-usb'
         },
         {
-          label: 'Workflows',
-          link: '/workflows',
+          label: 'Settings',
+          link: '/settings',
           icon: 'fa-cog'
         },
         {
-          label: 'Login',
-          link: '/auth/login',
-          icon: 'fa-user'
+          label: 'Help',
+          link: '/help',
+          icon: 'fa-question-circle'
         }
       ]
     }
